@@ -7,7 +7,6 @@
         "fabricloader": ">=${loader}",
         "fabric-language-kotlin": ">=${adapter}"
     },
-    "accessWidener": "${id}.accesswidener",
     "icon": "assets/${id}/icon.png",
     "description": "${desc}",
     "version": "${version}",
