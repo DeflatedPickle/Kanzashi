@@ -46,11 +46,7 @@ public abstract class MixinBlockItem extends Item implements Wearable {
               && ((BlockItem) headStack.getItem()).getBlock() instanceof PlantBlock)) {
         user.equipStack(equipmentSlot, itemStack.copy());
 
-        if (!world.isClient()) {
-          user.incrementStat(Stats.USED.getOrCreateStat(this));
-        }
-
-        itemStack.setCount(0);
+        itemStack.decrement(1);
         return TypedActionResult.success(itemStack, world.isClient());
       }
     }
