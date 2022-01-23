@@ -15,6 +15,7 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.BlockItem
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3f
 
 class FlowerFeatureRenderer<T : LivingEntity, M : BipedEntityModel<T>>(
@@ -42,12 +43,12 @@ class FlowerFeatureRenderer<T : LivingEntity, M : BipedEntityModel<T>>(
             contextModel.head.rotate(matrices)
             HeadFeatureRenderer.translate(matrices, false)
 
-            matrices.translate(-0.6, -0.2, -0.8)
+            matrices.translate(-0.6, -0.1, -0.4)
             matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(25f))
 
             MinecraftClient.getInstance().blockRenderManager.renderBlock(
                 item.block.defaultState,
-                entity.blockPos,
+                BlockPos.ORIGIN,
                 entity.world,
                 matrices,
                 vertexConsumers.getBuffer(RenderLayers.getBlockLayer(item.block.defaultState)),

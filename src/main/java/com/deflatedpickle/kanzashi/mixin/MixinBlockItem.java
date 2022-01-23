@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Wearable;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -41,9 +40,14 @@ public abstract class MixinBlockItem extends Item implements Wearable {
       EquipmentSlot equipmentSlot = EquipmentSlot.HEAD;
       ItemStack headStack = user.getEquippedStack(equipmentSlot);
 
-      if (headStack.isEmpty()
-          || (headStack.getItem() instanceof BlockItem
-              && ((BlockItem) headStack.getItem()).getBlock() instanceof PlantBlock)) {
+      if (headStack.isEmpty()) {
+        user.equipStack(equipmentSlot, itemStack.copy());
+
+        itemStack.decrement(1);
+        return TypedActionResult.success(itemStack, world.isClient());
+      } else if ((headStack.getItem() instanceof BlockItem
+          && ((BlockItem) headStack.getItem()).getBlock() instanceof PlantBlock)) {
+        user.giveItemStack(headStack);
         user.equipStack(equipmentSlot, itemStack.copy());
 
         itemStack.decrement(1);
