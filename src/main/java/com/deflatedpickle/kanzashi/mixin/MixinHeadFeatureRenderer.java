@@ -39,7 +39,7 @@ public class MixinHeadFeatureRenderer {
     if (!(stack.getItem() instanceof BlockItem
         && ((BlockItem) stack.getItem()).getBlock() instanceof PlantBlock)) {
       MinecraftClient.getInstance()
-          .getHeldItemRenderer()
+          .getItemRenderer()
           .renderItem(
               entity,
               stack,
@@ -47,7 +47,10 @@ public class MixinHeadFeatureRenderer {
               false,
               matrices,
               vertexConsumers,
-              light);
+              stack.getEntityHolder().getWorld(),
+              light,
+              0,
+              0);
     }
   }
 }
